@@ -3,6 +3,7 @@ export interface RoomType {
   name: string;
   tier: "ac" | "kipas";
   priceMonthly: number;
+  priceMonthlyMax?: number;
   size: string;
   availableRooms: number;
   image: string;
@@ -41,7 +42,7 @@ export interface FAQItem {
 export const KOS_PROFILE = {
   name: "Kos Uni Salma",
   tagline: "Hunian Kos Nyaman & Bersih dengan Kamar Mandi Dalam, Garasi Luas & Dapur Bersama",
-  whatsappNumber: "6281289901234",
+  whatsappNumber: "6281268558909",
   address: "75JC+5QQ, Gg. Puyuh, Air Jamban, Kec. Mandau, Kabupaten Bengkalis, Riau 28784",
   mapPlusCode: "75JC+5QQ Air Jamban, Bengkalis Regency, Riau",
   instagram: "@kos.unisàlma",
@@ -54,10 +55,11 @@ export const ROOMS: RoomType[] = [
     id: "ac",
     name: "Tipe Kamar AC",
     tier: "ac",
-    priceMonthly: 1100000,
+    priceMonthly: 800000,
+    priceMonthlyMax: 1100000,
     size: "3.5 x 4 Meter",
     availableRooms: 2,
-    image: "/images/deluxe-room.jpg",
+    image: "/images/video/kamar-01-utama.jpg",
     tagline: "Kamar ber-AC sejuk & nyaman dengan kamar mandi dalam, tempat tidur, lemari, meja & kursi.",
     features: [
       "AC Dingin & Terawat Berkala",
@@ -74,7 +76,7 @@ export const ROOMS: RoomType[] = [
     id: "kipas",
     name: "Tipe Kamar Kipas Angin",
     tier: "kipas",
-    priceMonthly: 700000,
+    priceMonthly: 550000,
     size: "3.5 x 3.5 Meter",
     availableRooms: 3,
     image: "/images/kipas-room.jpg",
@@ -91,6 +93,11 @@ export const ROOMS: RoomType[] = [
     ],
   },
 ];
+
+export function formatPriceRange(minimum: number, maximum = minimum) {
+  const rupiah = (value: number) => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(value);
+  return minimum === maximum ? rupiah(minimum) : `${rupiah(minimum)} – ${rupiah(maximum)}`;
+}
 
 export const AMENITIES: Amenity[] = [
   {
@@ -177,51 +184,73 @@ export const DURATION_PLANS = [
 export const GALLERY_ITEMS = [
   {
     id: "1",
-    title: "Gedung Depan Kos Uni Salma",
-    category: "Eksterior",
-    image: "/images/hero.jpg",
-    sizeClass: "large",
-    description: "Bangunan asri dan tertata di Gg. Puyuh, Air Jamban, Mandau.",
+    title: "Kamar AC dengan kamar mandi dalam",
+    category: "Kamar AC",
+    image: "/images/video/kamar-01-utama.jpg",
+    description: "Kamar berdinding ungu dengan tempat tidur bermotif bunga dan pintu kamar mandi dalam.",
   },
   {
     id: "2",
-    title: "Garasi Luas & Parkiran Berkanopi",
-    category: "Fasilitas Parkir",
-    image: "/images/parking.jpg",
-    sizeClass: "medium",
-    description: "Area garasi dan parkiran lapang untuk mobil dan motor penghuni.",
+    title: "Kamar AC dengan meja dan kursi",
+    category: "Kamar AC",
+    image: "/images/video/kamar-02-utama.jpg",
+    description: "Kamar berdinding abu-abu dengan AC, tempat tidur, meja, dan kursi.",
   },
   {
     id: "3",
-    title: "Kamar Tipe AC Full Furnished",
+    title: "Tempat tidur dan jendela kamar",
     category: "Kamar AC",
-    image: "/images/deluxe-room.jpg",
-    sizeClass: "regular",
-    description: "Lengkap dengan AC dingin, kasur empuk, lemari, serta meja dan kursi.",
+    image: "/images/video/kamar-01-tempat-tidur.jpg",
+    description: "Tempat tidur bersprei merah bermotif bunga di depan jendela bertirai ungu.",
   },
   {
     id: "4",
-    title: "Kamar Tipe Kipas Angin",
-    category: "Kamar Kipas",
-    image: "/images/kipas-room.jpg",
-    sizeClass: "regular",
-    description: "Adem, bersih, nyaman dengan tempat tidur, lemari, meja & kursi.",
+    title: "Lemari pakaian dengan cermin",
+    category: "Perabot Kamar",
+    image: "/images/video/kamar-01-lemari.jpg",
+    description: "Lemari pakaian dua pintu dengan cermin di kamar berdinding ungu.",
   },
   {
     id: "5",
-    title: "Kamar Mandi Dalam Pribadi",
-    category: "Sanitasi",
-    image: "/images/bathroom.jpg",
-    sizeClass: "regular",
-    description: "Tersedia kamar mandi dalam bersih di setiap kamar tanpa perlu antre.",
+    title: "AC dinding di kamar",
+    category: "Kamar AC",
+    image: "/images/video/kamar-01-ac.jpg",
+    description: "Unit AC dinding pada kamar pertama.",
   },
   {
     id: "6",
-    title: "Dapur Bersama Lengkap",
-    category: "Fasilitas Bersama",
-    image: "/images/pantry.jpg",
-    sizeClass: "regular",
-    description: "Area dapur bersama untuk memasak harian, lengkap dengan kompor & kulkas.",
+    title: "Kamar mandi dengan shower",
+    category: "Sanitasi",
+    image: "/images/video/kamar-01-kamar-mandi.jpg",
+    description: "Kamar mandi dalam dengan shower, ember, dan kloset jongkok.",
+  },
+  {
+    id: "7",
+    title: "Sudut kamar dengan kulkas",
+    category: "Kamar AC",
+    image: "/images/video/kamar-02-sudut-ruangan.jpg",
+    description: "Sudut kamar kedua dengan tempat tidur bermotif geometris dan kulkas.",
+  },
+  {
+    id: "8",
+    title: "Meja dan kursi dekat jendela",
+    category: "Perabot Kamar",
+    image: "/images/video/kamar-02-meja.jpg",
+    description: "Meja kayu dan kursi di dekat jendela kamar kedua.",
+  },
+  {
+    id: "9",
+    title: "Kulkas di dalam kamar",
+    category: "Perabot Kamar",
+    image: "/images/video/kamar-02-kulkas.jpg",
+    description: "Kulkas hitam di sudut kamar kedua.",
+  },
+  {
+    id: "10",
+    title: "Kamar mandi dengan kloset jongkok",
+    category: "Sanitasi",
+    image: "/images/video/kamar-02-kamar-mandi.jpg",
+    description: "Kamar mandi dalam dengan kloset jongkok, selang, dan penampung air.",
   },
 ];
 

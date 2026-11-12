@@ -73,7 +73,7 @@ export default function BookingForm() {
               size={18}
               style={{ display: "inline-block", marginRight: "8px" }}
             />
-            +62 812-8990-1234
+            {KOS_PROFILE.whatsappNumber.replace(/^62/, "0")}
           </div>
           <div
             style={{ fontSize: "0.8rem", color: "#d1e7dd", marginTop: "4px" }}

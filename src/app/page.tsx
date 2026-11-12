@@ -97,7 +97,7 @@ export default function Home() {
           <div className="container wrap">
             <div className="section-header section-header--split">
               <div><p className="eyebrow">05 / Galeri</p><h2 id="gallery-title">Lihat setiap sudutnya.</h2></div>
-              <p className="section-subtitle">Dari kamar sampai ruang bersama. Buka foto untuk melihat detail, lalu jadwalkan kunjungan Anda.</p>
+              <p className="section-subtitle">Lihat kamar, perabot, dan kamar mandi dalam. Buka foto untuk melihat detail, lalu jadwalkan kunjungan Anda.</p>
             </div>
             <GalleryViewer />
           </div>

@@ -3,13 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Check, MoveUpRight } from "lucide-react";
-import { ROOMS, KOS_PROFILE, type RoomType } from "@/data/kosData";
+import { ROOMS, KOS_PROFILE, formatPriceRange, type RoomType } from "@/data/kosData";
 
 export default function RoomFilter() {
   const [filter, setFilter] = useState("all");
   const rooms = filter === "all" ? ROOMS : ROOMS.filter((room) => room.tier === filter);
-  const formatPrice = (price: number) => new Intl.NumberFormat("id-ID").format(price);
-  const roomLink = (room: RoomType) => `https://wa.me/${KOS_PROFILE.whatsappNumber}?text=${encodeURIComponent(`Halo Uni Salma, saya ingin menanyakan ketersediaan kamar ${room.name} (Rp${formatPrice(room.priceMonthly)}/bulan). Apakah masih tersedia?`)}`;
+  const roomLink = (room: RoomType) => `https://wa.me/${KOS_PROFILE.whatsappNumber}?text=${encodeURIComponent(`Halo Uni Salma, saya ingin menanyakan ketersediaan kamar ${room.name} (${formatPriceRange(room.priceMonthly, room.priceMonthlyMax)}/bulan). Apakah masih tersedia?`)}`;
 
   return (
     <div>
@@ -22,7 +21,7 @@ export default function RoomFilter() {
           <p className="room-tagline">{room.tagline}</p>
           <ul className="room-features-list">{room.features.slice(0, 4).map((feature) => <li key={feature}><Check size={15} /><span>{feature}</span></li>)}</ul>
           <details className="room-extra"><summary>Lihat fasilitas lainnya</summary><ul className="room-features-list">{room.features.slice(4).map((feature) => <li key={feature}><Check size={15} /><span>{feature}</span></li>)}</ul></details>
-          <div className="room-card-bottom"><p className="room-pricing"><strong>Rp{formatPrice(room.priceMonthly)}</strong><span> / bulan</span></p><a href={roomLink(room)} target="_blank" rel="noopener noreferrer" className="link">Tanya kamar <ArrowUpRight size={17} /></a></div>
+          <div className="room-card-bottom"><p className="room-pricing"><strong>{formatPriceRange(room.priceMonthly, room.priceMonthlyMax)}</strong><span> / bulan</span></p><a href={roomLink(room)} target="_blank" rel="noopener noreferrer" className="link">Tanya kamar <ArrowUpRight size={17} /></a></div>
           <a href="#kalkulator" className="room-calculator-link link">Bandingkan paket sewa <ArrowUpRight size={14} /></a>
         </div>
       </article>)}</div>
